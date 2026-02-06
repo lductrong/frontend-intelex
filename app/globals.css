@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom styles for React integration while keeping original template format */
+
+/* Ensure original template styles take precedence over Tailwind base */
+@layer base {
+  /* Let original template handle typography and base styles */
+}
+
+@layer components {
+  /* Custom React-specific components that enhance original template */
+  .react-typewriter {
+    @apply inline-block;
+  }
+  
+  .react-preloader {
+    @apply fixed inset-0 bg-white z-[9999] flex items-center justify-center;
+  }
+  
+  .react-preloader.loaded {
+    @apply hidden;
+  }
+}
+
+@layer utilities {
+  /* Utility classes to supplement original template when needed */
+  .smooth-scroll {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom cursor styles for typewriter effect - keep original format */
+.cursor {
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+/* Ensure original template preloader works with React */
+#pre-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loaded #pre-loader {
+  display: none;
+}
+
+/* Sticky header styles */
+.sticky-header {
+  animation: slideDown 0.3s ease-in-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* Ensure smooth transitions */
+.wrapper {
+  position: relative;
+}
+
+main {
+  position: relative;
+  z-index: 1;
+}
