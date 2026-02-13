@@ -24,12 +24,12 @@ export default function RootLayout({
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis:300,400,500,600,700,800" />
 
         {/* Original Template CSS - Keep all styling */}
-        <link rel="stylesheet" type="text/css" href="/css/plugins-css.css" />
+         <link rel="stylesheet" type="text/css" href="/css/plugins-css.css" />
         <link rel="stylesheet" type="text/css" href="/css/typography.css" />
         <link rel="stylesheet" type="text/css" href="/css/shortcodes/shortcodes.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/responsive.css" />
-        <link rel="stylesheet" type="text/css" href="/css/skins/skin-yellow.css" />
+        <link rel="stylesheet" type="text/css" href="/css/skins/skin-yellow.css" /> 
       </head>
       <body>
         {children}

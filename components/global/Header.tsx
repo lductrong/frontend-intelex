@@ -1,113 +1,84 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-
-interface HeaderData {
-  logoHeader?: {
-    url: string;
-    alternativeText?: string;
-  };
-  menuItems?: Array<{
-    label: string;
-    url: string;
-    isExternal: boolean;
-  }>;
-  authButtons?: boolean;
-}
-
-interface HeaderProps {
-  data?: HeaderData;
-}
+import Link from 'next/link';
 
 export default function Header({ data }: HeaderProps) {
   const [isSticky, setIsSticky] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); // Quản lý đóng/mở menu mobile
 
   useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      setIsSticky(scrollTop > 100);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    const handleScroll = () => setIsSticky(window.scrollY > 100);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Fallback menu items if no data from backend
-  const defaultMenuItems = [
-    { label: 'Home', url: '/', isExternal: false },
-    { label: 'About', url: '/about', isExternal: false },
-    { label: 'Academy', url: '/academy', isExternal: false },
-    { label: 'Community', url: '/community', isExternal: false },
-    { label: 'Venture Hub', url: '/venture-hub', isExternal: false },
-    { label: 'Partners', url: '/partners', isExternal: false },
-    { label: 'Blog', url: '/blog', isExternal: false },
-  ];
-
-  const menuItems = data?.menuItems || defaultMenuItems;
-  const showAuthButtons = data?.authButtons !== false; // Default to true
-  const logoUrl = data?.logoHeader?.url 
-    ? `${process.env.NEXT_PUBLIC_STRAPI_URL || 'http://localhost:1337'}${data.logoHeader.url}`
-    : '/images/logo.png';
+  const menuItems = data?.menuItems || [/* ...default items... */];
 
   return (
     <header 
-      id="header" 
-      className={`header dark ${isSticky ? 'sticky-header' : ''}`}
-      style={{
-        position: isSticky ? 'fixed' : 'relative',
-        top: isSticky ? 0 : 'auto',
-        left: isSticky ? 0 : 'auto',
-        right: isSticky ? 0 : 'auto',
-        zIndex: isSticky ? 9999 : 'auto',
-        transition: 'all 0.3s ease-in-out'
-      }}
+      className={`fixed w-full z-50 transition-all duration-300 ${
+        isSticky ? 'bg-black/90 py-2 shadow-lg' : 'bg-transparent py-4'
+      }`}
     >
-      <div className="menu">
-        <nav id="menu" className="mega-menu">
-          <section className="menu-list-items">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-lg-12 col-md-12 position-relative d-flex align-items-center justify-content-between">
-                  {/* Menu Logo */}
-                  <ul className="menu-logo m-0">
-                    <li>
-                      <a href="/">
-                        <img id="logo_img" src={logoUrl} alt="logo" />
-                      </a>
-                    </li>
-                  </ul>
+      <div className="container mx-auto px-4 flex justify-between items-center">
+        {/* Logo */}
+        <Link href="/" className="z-50">
+          <img src="/images/logo.png" alt="Logo" className="h-10 w-auto" />
+        </Link>
 
-                  {/* Menu Links */}
-                  <div className="menu-bar">
-                    <ul className="menu-links d-flex align-items-center m-0 list-unstyled">
-                      {menuItems.map((item, index) => (
-                        <li key={index}>
-                          {item.isExternal ? (
-                            <a 
-                              href={item.url || '#'} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                            >
-                              {item.label} <i className="fa fa-indicator"></i>
-                            </a>
-                          ) : (
-                            <a href={item.url || '/'}>
-                              {item.label} <i className="fa fa-indicator"></i>
-                            </a>
-                          )}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </section>
+        {/* Desktop Menu: Hiện từ màn hình lg (1024px) trở lên */}
+        <nav className="hidden lg:flex items-center space-x-8">
+          {menuItems.map((item, idx) => (
+            <Link 
+              key={idx} 
+              href={item.url} 
+              className="text-white hover:text-blue-400 transition-colors"
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+
+        {/* Nút Hamburger cho Mobile: Ẩn trên màn hình lg */}
+        <button 
+          className="lg:hidden z-50 text-white p-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            {isOpen ? (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            ) : (
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            )}
+          </svg>
+        </button>
+
+        {/* Mobile Menu: Chỉ hiện trên Mobile (lg:hidden) */}
+        <div className={`
+          fixed top-20 right-4 w-64 bg-slate-900/95 backdrop-blur-sm 
+          rounded-2xl shadow-2xl border border-white/10
+          transition-all duration-300 origin-top-right transform lg:hidden
+          ${isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0 pointer-events-none'}
+        `}>
+          <nav className="flex flex-col p-6 space-y-4">
+            {menuItems.map((item, idx) => (
+              <Link 
+                key={idx} 
+                href={item.url} 
+                className="text-lg text-white hover:text-blue-400 border-b border-white/5 pb-2 last:border-0"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+            
+            {/* Nếu bạn có thêm nút Login/Register thì để ở đây */}
+            <button className="bg-blue-600 text-white py-2 rounded-lg mt-2">
+              Get Started
+            </button>
+          </nav>
+        </div>
       </div>
     </header>
   );

@@ -21,7 +21,7 @@ export default function CriteriaSection({ sectionData, criteria }: CriteriaSecti
         <div className="row">
           {criteria && criteria.length > 0 ? (
             criteria.map((item, index) => (
-              <div key={index} className="col-lg-6 col-md-6 mb-30">
+              <div key={index} className="col-lg-6 col-md-6 col-sm-12 mb-30">
                 <div className="feature-text text-start hover:shadow-lg transition-all duration-300">
                   <div className="feature-icon float-start me-4">
                     <i className={`${item.icon || 'ti-check-box'} theme-color fa-2x`}></i>

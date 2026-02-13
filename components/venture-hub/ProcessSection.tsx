@@ -21,7 +21,7 @@ export default function ProcessSection({ sectionData, processSteps }: ProcessSec
         <div className="row">
           {processSteps && processSteps.length > 0 ? (
             processSteps.map((step, index) => (
-              <div key={index} className="col-lg-3 col-md-6 mb-30">
+              <div key={index} className="col-lg-3 col-md-6 col-sm-6 mb-30">
                 <div className="feature-text box-shadow text-center white-bg hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <div className="feature-icon">
                     <span className="step-number theme-color">{step.stepNumber}</span>

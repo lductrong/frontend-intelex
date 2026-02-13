@@ -30,7 +30,7 @@ export default function CourseCard({ course, mentors, index }: CourseCardProps) 
   };
 
   return (
-    <div className={`col-lg-4 col-md-6 mb-30 ${course.category} ${course.level}`}>
+    <div className={`col-lg-4 col-md-6 col-sm-12 mb-30 ${course.category} ${course.level}`}>
       <div className="feature-text box-shadow white-bg hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
         <div className="feature-img">
           <img 

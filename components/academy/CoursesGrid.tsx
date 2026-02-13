@@ -40,7 +40,7 @@ export default function CoursesGrid({ courses, mentors }: CoursesGridProps) {
         {/* Load More Button */}
         {hasMoreCourses && (
           <div className="row justify-content-center mt-50">
-            <div className="col-md-6 text-center">
+            <div className="col-lg-6 col-md-8 text-center">
               <a 
                 className="button button-border hover:scale-105 transition-transform duration-300 cursor-pointer"
                 onClick={handleLoadMore}

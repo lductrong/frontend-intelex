@@ -66,7 +66,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
     <section className="bg-light page-section-ptb" id="application-form">
       <div className="container">
         <div className="row justify-content-center">
-          <div className="col-lg-8">
+          <div className="col-lg-8 col-md-10">
             <div className="white-bg p-50 box-shadow hover:shadow-lg transition-all duration-300">
               <div className="text-center mb-40">
                 <h3 className="theme-color mb-20">{sectionData.heading}</h3>
@@ -75,7 +75,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
 
               <form className="contact-form" onSubmit={handleSubmit}>
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <input 
                         id="name" 
@@ -89,7 +89,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <input 
                         id="email" 
@@ -106,7 +106,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
                 </div>
 
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <input 
                         id="phone" 
@@ -120,7 +120,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <input 
                         id="university" 
@@ -137,7 +137,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
                 </div>
 
                 <div className="row">
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <input 
                         id="startup-name" 
@@ -151,7 +151,7 @@ export default function ApplicationSection({ sectionData }: ApplicationSectionPr
                       />
                     </div>
                   </div>
-                  <div className="col-md-6">
+                  <div className="col-md-6 col-sm-12">
                     <div className="form-group mb-20">
                       <select 
                         className="form-select" 

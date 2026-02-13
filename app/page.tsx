@@ -9,7 +9,7 @@ import AcademySection from '@/components/home/AcademySection';
 import EventSection from '@/components/home/EventSection';
 import CtaSection from '@/components/home/CtaSection';
 import StrategicPartnersSection from '@/components/partners/StrategicPartnersSection';
-import Header from '@/components/global/Header';
+import Header from '@/components/global/Header'; 
 import Footer from '@/components/global/Footer';
 import { usePreloader } from '@/hooks/usePreloader';
 import { useBackToTop } from '@/hooks/useBackToTop';
